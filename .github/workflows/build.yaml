@@ -40,5 +40,6 @@ jobs:
           buildevents cmd $TRACE_ID $STEP_ID 'sleep some more' -- sleep 2
       - run: |
           buildevents step $TRACE_ID $STEP_ID $STEP_START 'step 2'
-      - run: go build -o hello .
+      - run: |
+          buildevents cmd $TRACE_ID $STEP_ID 'go build' -- go build -o hello .
 
