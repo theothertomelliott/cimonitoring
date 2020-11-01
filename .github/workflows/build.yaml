@@ -8,6 +8,17 @@ jobs:
     name: 'Build'
     runs-on: ubuntu-latest
     steps:
+      - uses: kvrhdn/gha-buildevents@main
+        with:
+          # Required: Honeycomb API key - needed to send traces.
+          apikey: ${{ secrets.BUILDEVENTS_APIKEY }}
+
+          # Required: the Honeycomb dataset to use.
+          dataset: gha-buildevents_integration
+
+          # Required: the job status, this will be used in the post section and sent
+          # as status of the trace. Must always be ${{ job.status }}.
+          job-status: ${{ job.status }}
       - uses: actions/checkout@v2
       - uses: actions/setup-go@v2
         with:
