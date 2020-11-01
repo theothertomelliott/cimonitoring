@@ -9,6 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: kvrhdn/gha-buildevents@main
+        name: gha
         with:
           # Required: Honeycomb API key - needed to send traces.
           apikey: ${{ secrets.BUILDEVENTS_APIKEY }}
@@ -20,7 +21,9 @@ jobs:
           # as status of the trace. Must always be ${{ job.status }}.
           job-status: ${{ job.status }}
       - uses: actions/checkout@v2
+        name: checkout
       - uses: actions/setup-go@v2
+        name: go-build
         with:
           go-version: '^1.15.1' # The Go version to download (if necessary) and use.
-      - run: buildevents cmd $TRACE_ID $STEP_ID go-build -- go build -o hello .
+      - run: go build -o hello .
