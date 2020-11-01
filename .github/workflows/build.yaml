@@ -23,4 +23,4 @@ jobs:
       - uses: actions/setup-go@v2
         with:
           go-version: '^1.15.1' # The Go version to download (if necessary) and use.
-      - run: go build -o hello .
+      - run: buildevents cmd $TRACE_ID $STEP_ID go-build -- go build -o hello .
