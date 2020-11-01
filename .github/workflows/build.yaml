@@ -41,5 +41,10 @@ jobs:
       - run: |
           buildevents step $TRACE_ID $STEP_ID $STEP_START 'step 2'
       - run: |
+          echo "STEP_ID=2" >> $GITHUB_ENV
+          echo "STEP_START=$(date +%s)" >> $GITHUB_ENV
+      - run: |
           buildevents cmd $TRACE_ID $STEP_ID 'go build' -- go build -o hello .
+      - run: |
+          buildevents step $TRACE_ID $STEP_ID $STEP_START 'step 3'
 
